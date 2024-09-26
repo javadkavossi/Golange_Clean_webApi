@@ -3009,6 +3009,7 @@ paths:
       - PersianYears
 securityDefinitions:
   AuthBearer:
+    description: Type "Bearer " followed by your token
     in: header
     name: Authorization
     type: apiKey

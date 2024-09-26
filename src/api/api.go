@@ -51,12 +51,13 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 	api := r.Group("/api")
 
 	v1 := api.Group("/v1")
-
 	{
+		// Test
 		health := v1.Group("/health")
-		users := v1.Group("/users")
+		testRouter := v1.Group("/test" /*middleware.Authentication(cfg), middleware.Authorization([]string{"admin"})*/)
 
-		router.Health(health)
+		// User
+		users := v1.Group("/users")
 
 		// Base
 		countries := v1.Group("/countries", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
@@ -65,6 +66,25 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 		companies := v1.Group("/companies", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
 		colors := v1.Group("/colors", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
 		years := v1.Group("/years", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+
+		// Property
+		properties := v1.Group("/properties", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		propertyCategories := v1.Group("/property-categories", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+
+		// Car
+		carTypes := v1.Group("/car-types", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		gearboxes := v1.Group("/gearboxes", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		carModels := v1.Group("/car-models", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		carModelColors := v1.Group("/car-model-colors", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		carModelYears := v1.Group("/car-model-years", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		carModelPriceHistories := v1.Group("/car-model-price-histories", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		carModelImages := v1.Group("/car-model-images", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		carModelProperties := v1.Group("/car-model-properties", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		carModelComments := v1.Group("/car-model-comments", middleware.Authentication(cfg), middleware.Authorization([]string{"admin", "default"}))
+
+		// Test
+		router.Health(health)
+		router.TestRouter(testRouter)
 
 		// User
 		router.User(users, cfg)
@@ -77,8 +97,25 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 		router.Color(colors, cfg)
 		router.Year(years, cfg)
 
-	}
+		// Property
+		router.Property(properties, cfg)
+		router.PropertyCategory(propertyCategories, cfg)
 
+		// Car
+		router.CarType(carTypes, cfg)
+		router.Gearbox(gearboxes, cfg)
+		router.CarModel(carModels, cfg)
+		router.CarModelColor(carModelColors, cfg)
+		router.CarModelYear(carModelYears, cfg)
+		router.CarModelPriceHistory(carModelPriceHistories, cfg)
+		router.CarModelImage(carModelImages, cfg)
+		router.CarModelProperty(carModelProperties, cfg)
+		router.CarModelComment(carModelComments, cfg)
+
+		r.Static("/static", "./uploads")
+
+		// r.GET("/metrics", gin.WrapH(promhttp.Handler()))
+	}
 	v2 := api.Group("/v2")
 	{
 		health := v2.Group("/health")
