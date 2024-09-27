@@ -1,13 +1,13 @@
 package helper
 
-import validation "github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
+import validations "github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
 
 type BaseHttpResponse struct {
-	Result           any                           `json:"result"`
-	Success          bool                          `json:"success"`
-	ResultCode       ResultCode                    `json:"resultCode"`
-	ValidationErrors *[]validation.ValidationError `json:"validationErrors"`
-	Error            any                           `json:"error"`
+	Result           any                            `json:"result"`
+	Success          bool                           `json:"success"`
+	ResultCode       ResultCode                     `json:"resultCode"`
+	ValidationErrors *[]validations.ValidationError `json:"validationErrors"`
+	Error            any                            `json:"error"`
 }
 
 func GenerateBaseResponse(result any, success bool, resultCode ResultCode) *BaseHttpResponse {
@@ -38,6 +38,6 @@ func GenerateBaseResponseWithValidationError(result any, success bool, resultCod
 	return &BaseHttpResponse{Result: result,
 		Success:          success,
 		ResultCode:       resultCode,
-		ValidationErrors: validation.GetValidationErrors(err),
+		ValidationErrors: validations.GetValidationErrors(err),
 	}
 }

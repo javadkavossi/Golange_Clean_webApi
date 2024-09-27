@@ -17,15 +17,94 @@ const docTemplate = `{
     "paths": {
         "/v1/health/": {
             "get": {
-                "description": "HealthCheck",
+                "description": "Health Check",
                 "consumes": [
                     "application/json"
                 ],
-                "tags": [
-                    "Health"
+                "produces": [
+                    "application/json"
                 ],
-                "summary": "HealthCheck",
-                "responses": {}
+                "tags": [
+                    "health"
+                ],
+                "summary": "Health Check",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/helper.BaseHttpResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Failed",
+                        "schema": {
+                            "$ref": "#/definitions/helper.BaseHttpResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "helper.BaseHttpResponse": {
+            "type": "object",
+            "properties": {
+                "error": {},
+                "result": {},
+                "resultCode": {
+                    "$ref": "#/definitions/helper.ResultCode"
+                },
+                "success": {
+                    "type": "boolean"
+                },
+                "validationErrors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/validations.ValidationError"
+                    }
+                }
+            }
+        },
+        "helper.ResultCode": {
+            "type": "integer",
+            "enum": [
+                0,
+                40001,
+                40101,
+                40301,
+                40401,
+                42901,
+                42902,
+                50001,
+                50002
+            ],
+            "x-enum-varnames": [
+                "Success",
+                "ValidationError",
+                "AuthError",
+                "ForbiddenError",
+                "NotFoundError",
+                "LimiterError",
+                "OtpLimiterError",
+                "CustomRecovery",
+                "InternalError"
+            ]
+        },
+        "validations.ValidationError": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "property": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
             }
         }
     }
