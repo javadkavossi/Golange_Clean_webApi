@@ -27,5 +27,6 @@ func InitRedis(cfg *config.Config) {
 }
 
 func GetRedis() *redis.Client {
+	
 	return redisClient
 }
