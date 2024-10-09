@@ -43,6 +43,9 @@ func InitServer() {
 		routers.Health(health)
 	}
 
-	r.Run(fmt.Sprintf(":%s", cfg.Server.Port))
+	r.Run(fmt.Sprintf(":%s", cfg.Server.ExternalPort))
+
+
+
 
 }
