@@ -1,12 +1,15 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
 )
 
 func InitServer() {
-
+	cfg := config.GetConfig()
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 	v1 := r.Group("/api/v1/")
@@ -14,6 +17,6 @@ func InitServer() {
 		health := v1.Group("/health")
 		routers.Health(health)
 	}
-	r.Run(":5005")
+	r.Run(fmt.Sprintf(":%s", cfg.Server.Port))
 
 }
