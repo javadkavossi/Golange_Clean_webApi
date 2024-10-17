@@ -1,21 +1,18 @@
 package api
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
 )
 
 func InitServer() {
- 
+
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 	v1 := r.Group("/api/v1/")
 	{
-		v1.GET("/health", func(ctx *gin.Context) {
-			ctx.JSON(http.StatusOK, "Working!")
-			return
-		})
+		health := v1.Group("/health")
+		routers.Health(health)
 	}
 	r.Run(":5005")
 
