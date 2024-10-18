@@ -4,14 +4,24 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/go-playground/validator/v10"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middlewares"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
 )
 
 func InitServer() {
 	cfg := config.GetConfig()
 	r := gin.New()
-	r.Use(gin.Logger(), gin.Recovery())
+
+	val, ok := binding.Validator.Engine().(*validator.Validate)
+	if ok {
+		val.RegisterValidation("mobil", validations.IranianMobilNumberValidation, true)
+	}
+
+	r.Use(gin.Logger(), gin.Recovery() /*middlewares.TestMiddleware()*/, middlewares.LimiterByRequest())
 
 	api := r.Group("/api")
 

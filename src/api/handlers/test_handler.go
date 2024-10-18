@@ -12,8 +12,9 @@ type header struct {
 }
 
 type personData struct {
-	Name   string `json:"name"`
-	Family string `json:"family"`
+	Name        string `json:"name" binding:"required,alpha,min=4,max=10"`
+	Family      string `json:"family"`
+	MobilNumber string `json:"mobil_number" binding:"required,mobil,min=11,max=11"`
 }
 
 type TestHandler struct {
@@ -96,7 +97,14 @@ func (h *TestHandler) ParamsBinder1(c *gin.Context) {
 func (h *TestHandler) BodyBinder(c *gin.Context) {
 
 	p := personData{}
-	c.ShouldBindJSON(&p)
+	err := c.ShouldBindJSON(&p)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadGateway, gin.H{
+			"validationError": err.Error(),
+		})
+		return
+	}
+
 	fullName := p.Name + " " + p.Family
 
 	c.JSON(http.StatusOK, gin.H{
@@ -110,12 +118,12 @@ func (h *TestHandler) BodyBinder(c *gin.Context) {
 func (h *TestHandler) FormBinder(c *gin.Context) {
 	p := personData{}
 	c.Bind(&p)
-	fullName := p.Name + " " + p.Family
+	// fullName := p.Name + " " + p.Family
 
 	c.JSON(http.StatusOK, gin.H{
-		"result":    "FormBinder",
-		"person":    p,
-		"full name": fullName,
+		"result": "FormBinder",
+		"person": p,
+		// "full name": fullName,
 	})
 }
 
