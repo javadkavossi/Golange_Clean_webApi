@@ -16,6 +16,7 @@ services:
     networks:
       - webapi_network
     restart: unless-stopped
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_container
