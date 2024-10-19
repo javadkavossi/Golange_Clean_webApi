@@ -17,10 +17,13 @@ func main() {
 		log.Fatal(err)
 	}
 
+
+
 	err = db.InitDb(cfg)
 	defer db.CloseDb()
 	if err != nil {
 		log.Fatal(err)
 	}
+	
 	api.InitServer(cfg)
 }
