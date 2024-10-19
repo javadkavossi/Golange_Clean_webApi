@@ -12,19 +12,22 @@ import (
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
 )
 
-func InitServer() {
-	cfg := config.GetConfig()
+func InitServer(cfg *config.Config) {
+	// cfg := config.GetConfig()
 	r := gin.New()
-
-	val, ok := binding.Validator.Engine().(*validator.Validate)
-	if ok {
-		val.RegisterValidation("mobil", validations.IranianMobileNumberValidator, true)
-		val.RegisterValidation("password", validations.PasswordValidator, true)
-
-	}
+	// *-------------------------- Get Functions
+	RegisterValidators()
+	RegisterRoutes(r, cfg)
+	// ?-------------------------------------------------
 	r.Use(middlewares.Cors(cfg))
-
 	r.Use(gin.Logger(), gin.CustomRecovery(middlewares.ErrorHandler) /*middlewares.TestMiddleware()*/, middlewares.LimiterByRequest())
+	r.Run(fmt.Sprintf(":%s", cfg.Server.ExternalPort))
+
+}
+
+// *-------------------------- Functions
+
+func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 
 	api := r.Group("/api")
 
@@ -42,10 +45,15 @@ func InitServer() {
 		health := v2.Group("/health")
 		routers.Health(health)
 	}
-
-	r.Run(fmt.Sprintf(":%s", cfg.Server.ExternalPort))
-
-
-
-
 }
+
+func RegisterValidators() {
+	val, ok := binding.Validator.Engine().(*validator.Validate)
+	if ok {
+		val.RegisterValidation("mobil", validations.IranianMobileNumberValidator, true)
+		val.RegisterValidation("password", validations.PasswordValidator, true)
+
+	}
+}
+
+// ?-------------------------------------------------
