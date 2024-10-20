@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/helper"
 )
 
 type header struct {
@@ -95,36 +96,53 @@ func (h *TestHandler) ParamsBinder1(c *gin.Context) {
 }
 
 func (h *TestHandler) BodyBinder(c *gin.Context) {
-
 	p := personData{}
 	err := c.ShouldBindJSON(&p)
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadGateway, gin.H{
-			"validationError": err.Error(),
-		})
+		c.AbortWithStatusJSON(http.StatusBadRequest,
+			helper.GenerateBaseResponseWithValidationError(nil,
+				false, helper.ValidationError, err))
 		return
 	}
-
-	fullName := p.Name + " " + p.Family
-
-	c.JSON(http.StatusOK, gin.H{
-		"result":    "BodyBinder",
-		"name":      p,
-		"full name": fullName,
-	})
-
+	c.JSON(http.StatusOK, helper.GenerateBaseResponse(gin.H{
+		"result": "BodyBinder",
+		"person": p,
+	}, true, 0))
 }
+
+// func (h *TestHandler) BodyBinder(c *gin.Context) {
+
+// 	p := personData{}
+// 	err := c.ShouldBindJSON(&p)
+// 	if err != nil {
+// 		c.AbortWithStatusJSON(http.StatusBadGateway,
+// 			helper.GenerateBaseResponseWithError(nil, false, -1, err))
+// 		return
+// 	}
+
+// 	fullName := p.Name + " " + p.Family
+
+// 	// c.JSON(http.StatusOK, gin.H{
+// 	// 	"result":    "BodyBinder",
+// 	// 	"name":      p,
+// 	// 	"full name": fullName,
+// 	// })
+// 	c.JSON(http.StatusOK, helper.GenerateBaseResponse(
+// 		gin.H{
+// 			"result":    "BodyBinder",
+// 			"name":      p,
+// 			"full name": fullName,
+// 		}, true, 0))
+
+// }
 
 func (h *TestHandler) FormBinder(c *gin.Context) {
 	p := personData{}
 	c.Bind(&p)
-	// fullName := p.Name + " " + p.Family
-
-	c.JSON(http.StatusOK, gin.H{
+	c.JSON(http.StatusOK, helper.GenerateBaseResponse(gin.H{
 		"result": "FormBinder",
 		"person": p,
-		// "full name": fullName,
-	})
+	}, true, 0))
 }
 
 func (h *TestHandler) FileBinder(c *gin.Context) {
