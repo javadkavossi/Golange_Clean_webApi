@@ -13,6 +13,11 @@ type Config struct {
 	Server   ServerConfig
 	Postgres PostgresConfig
 	Redis    RedisConfig
+	Password PasswordConfig
+	Cors     CorsConfig
+	Logger   LoggerConfig
+	Otp      OtpConfig
+	JWT      JWTConfig
 }
 
 type ServerConfig struct {
@@ -79,6 +84,7 @@ type JWTConfig struct {
 	Secret                     string
 	RefreshSecret              string
 }
+
 
 func GetConfig() *Config {
 	cfgPath := getConfigPath(os.Getenv("APP_ENV"))

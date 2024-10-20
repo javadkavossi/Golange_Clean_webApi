@@ -19,14 +19,16 @@ func InitServer() {
 	val, ok := binding.Validator.Engine().(*validator.Validate)
 	if ok {
 		val.RegisterValidation("mobil", validations.IranianMobilNumberValidation, true)
-	}
+		val.RegisterValidation("password", validations.PasswordValidator, true)
 
+	}
+	r.Use(middlewares.Cors(cfg))
 	r.Use(gin.Logger(), gin.Recovery() /*middlewares.TestMiddleware()*/, middlewares.LimiterByRequest())
 
 	api := r.Group("/api")
 
 	v1 := api.Group("/v1")
-	
+
 	{
 		health := v1.Group("/health")
 		test_router := v1.Group("/test")

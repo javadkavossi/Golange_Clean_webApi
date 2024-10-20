@@ -2,7 +2,6 @@ package middlewares
 
 import (
 	"net/http"
-
 	"github.com/didip/tollbooth"
 	"github.com/gin-gonic/gin"
 )

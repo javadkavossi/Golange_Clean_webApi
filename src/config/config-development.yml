@@ -19,7 +19,26 @@ redis:
   port: 6379
   password: password
   db: 0
-  minIdleConnections: 100
-  poolSize: 5000
-  poolTimeout: 240
+  dialTimeout: 5
+  readTimeout: 5
+  writeTimeout: 5
+  poolSize: 10
+  poolTimeout: 15
+  idleCheckFrequency: 500
+password:
+  includeChars: true
+  includeDigits: true
+  minLength: 6
+  maxLength: 64
+  includeUppercase: true
+  includeLowercase: true
+otp:
+  expireTime: 120
+  digits: 6
+  limiter: 100
+jwt:
+  secret: "mySecretKey"
+  refreshSecret: "mySecretKey"
+  accessTokenExpireDuration: 1440
+  refreshTokenExpireDuration: 60
 
