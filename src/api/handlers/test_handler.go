@@ -136,6 +136,8 @@ func (h *TestHandler) BodyBinder(c *gin.Context) {
 
 // }
 
+
+
 func (h *TestHandler) FormBinder(c *gin.Context) {
 	p := personData{}
 	c.Bind(&p)
