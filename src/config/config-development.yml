@@ -1,10 +1,12 @@
 server:
-  Port: 5005
-  RunMode: debug
+  internalPort: 5005
+  externalPort: 5005
+  runMode: debug
 logger:
-  filePath: ../logs/logs.logger
-  Encoding: json
+  filePath: ../logs/
+  encoding: json
   level: debug
+  logger: zap
 cors:
   allowOrigins: "*"
 postgres:
@@ -13,7 +15,10 @@ postgres:
   user: postgres
   password: admin
   dbName: car_sale_db
-  sslMode: false
+  sslMode: disable
+  maxIdleConns: 15
+  maxOpenConns: 100
+  connMaxLifetime: 5
 redis:
   host: localhost
   port: 6379
@@ -41,4 +46,3 @@ jwt:
   refreshSecret: "mySecretKey"
   accessTokenExpireDuration: 1440
   refreshTokenExpireDuration: 60
-

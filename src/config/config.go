@@ -21,10 +21,9 @@ type Config struct {
 }
 
 type ServerConfig struct {
-	Port         string
-	InternalPort string
-	ExternalPort string
-	RunMode      string
+	InternalPort    string
+	ExternalPort    string
+	RunMode string
 }
 
 type LoggerConfig struct {
@@ -85,54 +84,61 @@ type JWTConfig struct {
 	RefreshSecret              string
 }
 
-
 func GetConfig() *Config {
 	cfgPath := getConfigPath(os.Getenv("APP_ENV"))
 	v, err := LoadConfig(cfgPath, "yml")
 	if err != nil {
-		log.Fatalf("Error in Load Config : %v", err)
+		log.Fatalf("Error in load config %v", err)
 	}
-	cfg, err := ParsConfig(v)
+
+	cfg, err := ParseConfig(v)
+	envPort := os.Getenv("PORT")
+	if envPort != ""{
+		cfg.Server.ExternalPort = envPort
+		log.Printf("Set external port from environment -> %s", cfg.Server.ExternalPort)
+	}else{
+		cfg.Server.ExternalPort = cfg.Server.InternalPort
+		log.Printf("Set external port from environment -> %s", cfg.Server.ExternalPort)
+	}
 	if err != nil {
-		log.Fatalf("Error in pars Config : %v", err)
+		log.Fatalf("Error in parse config %v", err)
 	}
+
 	return cfg
 }
 
-func ParsConfig(v *viper.Viper) (*Config, error) {
+func ParseConfig(v *viper.Viper) (*Config, error) {
 	var cfg Config
 	err := v.Unmarshal(&cfg)
-
 	if err != nil {
-		log.Printf("unable to parse config: %v", err)
+		log.Printf("Unable to parse config: %v", err)
 		return nil, err
 	}
 	return &cfg, nil
 }
+func LoadConfig(filename string, fileType string) (*viper.Viper, error) {
+	v := viper.New()
+	v.SetConfigType(fileType)
+	v.SetConfigName(filename)
+	v.AddConfigPath(".")
+	v.AutomaticEnv()
 
-func LoadConfig(filename string, filetype string) (*viper.Viper, error) {
-	V := viper.New()
-	V.SetConfigType(filetype)
-	V.SetConfigName(filename)
-	V.AddConfigPath(".")
-	V.AutomaticEnv()
-
-	err := V.ReadInConfig()
+	err := v.ReadInConfig()
 	if err != nil {
-		log.Printf("unable to read config: %v", err)
+		log.Printf("Unable to read config: %v", err)
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			return nil, errors.New("config file not found ! ")
+			return nil, errors.New("config file not found")
 		}
 		return nil, err
 	}
-	return V, nil
+	return v, nil
 }
 
 func getConfigPath(env string) string {
 	if env == "docker" {
-		return "config/config-docker"
+		return "/app/config/config-docker"
 	} else if env == "production" {
-		return "config/config-production"
+		return "/config/config-production"
 	} else {
 		return "../config/config-development"
 	}
