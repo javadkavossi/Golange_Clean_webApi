@@ -1,0 +1,13 @@
+info:
+  contact: {}
+paths:
+  /v1/health/:
+    get:
+      consumes:
+      - application/json
+      description: HealthCheck
+      responses: {}
+      summary: HealthCheck
+      tags:
+      - Health
+swagger: "2.0"

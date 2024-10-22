@@ -1,0 +1,21 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/v1/health/": {
+            "get": {
+                "description": "HealthCheck",
+                "consumes": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Health"
+                ],
+                "summary": "HealthCheck",
+                "responses": {}
+            }
+        }
+    }
+}

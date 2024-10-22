@@ -10,6 +10,9 @@ import (
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/docs"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func InitServer(cfg *config.Config) {
@@ -18,6 +21,7 @@ func InitServer(cfg *config.Config) {
 	// *-------------------------- Get Functions
 	RegisterValidators()
 	RegisterRoutes(r, cfg)
+	RegisterSwagger(r, cfg)
 	// ?-------------------------------------------------
 	r.Use(middlewares.Cors(cfg))
 	r.Use(gin.Logger(), gin.CustomRecovery(middlewares.ErrorHandler) /*middlewares.TestMiddleware()*/, middlewares.LimiterByRequest())
@@ -57,3 +61,16 @@ func RegisterValidators() {
 }
 
 // ?-------------------------------------------------
+
+// * ------------------- Swagger
+
+func RegisterSwagger(r *gin.Engine, cfg *config.Config) {
+	docs.SwaggerInfo.Title = "golang web api"
+	docs.SwaggerInfo.Description = "golang web api"
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.BasePath = "/api"
+	docs.SwaggerInfo.Host = fmt.Sprintf("localhost:%s", cfg.Server.ExternalPort)
+	docs.SwaggerInfo.Schemes = []string{"http"}
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+}
