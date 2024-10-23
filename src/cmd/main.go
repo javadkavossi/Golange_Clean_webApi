@@ -1,29 +1,28 @@
 package main
 
 import (
-	"log"
-
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/data/cache"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/data/db"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/logging"
 )
 
 func main() {
 	cfg := config.GetConfig()
+	logger := logging.NewLogger(cfg)
+
 	err := cache.InitRedis(cfg)
 	defer cache.CloseRedis()
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(logging.Redis, logging.Startup, err.Error(), nil)
 	}
-
-
 
 	err = db.InitDb(cfg)
 	defer db.CloseDb()
 	if err != nil {
-		log.Fatal(err)
+		logger.Fatal(logging.Postgres, logging.Startup, err.Error(), nil)
 	}
-	
+
 	api.InitServer(cfg)
 }
