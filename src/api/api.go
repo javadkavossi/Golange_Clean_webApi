@@ -6,27 +6,38 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
+	"github.com/javadkavossi/Golange_Clean_webApi/docs"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middlewares"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
-	"github.com/javadkavossi/Golange_Clean_webApi/docs"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/logging"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
+
+var logger = logging.NewLogger(config.GetConfig())
 
 func InitServer(cfg *config.Config) {
 	// cfg := config.GetConfig()
 	r := gin.New()
 	// *-------------------------- Get Functions
 	RegisterValidators()
-	RegisterRoutes(r, cfg)
-	RegisterSwagger(r, cfg)
+	r.Use(middlewares.DefaultStructuredLogger(cfg))
 	// ?-------------------------------------------------
+
 	r.Use(middlewares.Cors(cfg))
 	r.Use(gin.Logger(), gin.CustomRecovery(middlewares.ErrorHandler) /*middlewares.TestMiddleware()*/, middlewares.LimiterByRequest())
 	r.Run(fmt.Sprintf(":%s", cfg.Server.ExternalPort))
 
+	RegisterSwagger(r, cfg)
+	RegisterRoutes(r, cfg)
+	logger := logging.NewLogger(cfg)
+	logger.Info(logging.General, logging.Startup, "Started", nil)
+	err := r.Run(fmt.Sprintf(":%s", cfg.Server.InternalPort))
+	if err != nil {
+		logger.Fatal(logging.General, logging.Startup, err.Error(), nil)
+	}
 }
 
 // *-------------------------- Functions
@@ -73,4 +84,5 @@ func RegisterSwagger(r *gin.Engine, cfg *config.Config) {
 	docs.SwaggerInfo.Schemes = []string{"http"}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 }
