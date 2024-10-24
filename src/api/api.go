@@ -10,7 +10,7 @@ import (
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
-	"github.com/javadkavossi/Golange_Clean_webApi/src/docs"
+	"github.com/javadkavossi/Golange_Clean_webApi/docs"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
