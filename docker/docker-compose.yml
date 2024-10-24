@@ -43,7 +43,6 @@ services:
     networks:
       - webapi_network
     restart: unless-stopped
-
   kibana:
     build:
       context: elk/kibana/
