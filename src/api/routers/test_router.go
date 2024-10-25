@@ -2,11 +2,11 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/javadkavossi/Golange_Clean_webApi/src/api/handlers"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/handler"
 )
 
 func TestRouter(r *gin.RouterGroup) {
-	h := handlers.NewTestHandler()
+	h := handler.NewTestHandler()
 	r.GET("/", h.Test)
 	r.POST("/header1", h.HeaderBinder1)
 	r.POST("/header2", h.HeaderBinder2)

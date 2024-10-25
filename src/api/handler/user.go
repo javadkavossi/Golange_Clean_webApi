@@ -1,10 +1,14 @@
-package handlers
+package handler
 
 import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/dto"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/helper"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
+
+	"github.com/javadkavossi/Golange_Clean_webApi/src/dependency"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/usecase"
 )
 
