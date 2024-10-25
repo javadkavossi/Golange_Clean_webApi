@@ -6,11 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
-	"github.com/javadkavossi/Golange_Clean_webApi/docs"
+
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middlewares"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/docs"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/logging"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

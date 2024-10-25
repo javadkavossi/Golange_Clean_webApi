@@ -3,8 +3,9 @@ package main
 import (
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
-	"github.com/javadkavossi/Golange_Clean_webApi/src/data/cache"
-	"github.com/javadkavossi/Golange_Clean_webApi/src/data/db"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/infra/cache"
+	db "github.com/javadkavossi/Golange_Clean_webApi/src/infra/persistence/database"
+
 	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/logging"
 )
 
