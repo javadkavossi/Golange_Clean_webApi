@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -128,7 +129,9 @@ func (h *UsersHandler) SendOtp(c *gin.Context) {
 			helper.GenerateBaseResponseWithValidationError(nil, false, helper.ValidationError, err))
 		return
 	}
+	fmt.Print("----------------SendOtp 1 ---------------------")
 	err = h.otpUsecase.SendOtp(req.MobileNumber)
+
 	if err != nil {
 		c.AbortWithStatusJSON(helper.TranslateErrorToStatusCode(err),
 			helper.GenerateBaseResponseWithError(nil, false, helper.InternalError, err))

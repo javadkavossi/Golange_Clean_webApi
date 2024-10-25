@@ -9,7 +9,8 @@ import (
 
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middlewares"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
-	"github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
+	validation "github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
+
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/docs"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/logging"
@@ -23,16 +24,17 @@ func InitServer(cfg *config.Config) {
 	// cfg := config.GetConfig()
 	r := gin.New()
 	// *-------------------------- Get Functions
-	RegisterValidators()
 	r.Use(middlewares.DefaultStructuredLogger(cfg))
 	// ?-------------------------------------------------
 
 	r.Use(middlewares.Cors(cfg))
 	r.Use(gin.Logger(), gin.CustomRecovery(middlewares.ErrorHandler) /*middlewares.TestMiddleware()*/, middlewares.LimiterByRequest())
-	r.Run(fmt.Sprintf(":%s", cfg.Server.ExternalPort))
 
+	RegisterValidators()
 	RegisterSwagger(r, cfg)
 	RegisterRoutes(r, cfg)
+
+	r.Run(fmt.Sprintf(":%s", cfg.Server.ExternalPort))
 	logger := logging.NewLogger(cfg)
 	logger.Info(logging.General, logging.Startup, "Started", nil)
 	err := r.Run(fmt.Sprintf(":%s", cfg.Server.InternalPort))
@@ -51,9 +53,12 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 
 	{
 		health := v1.Group("/health")
+		users := v1.Group("/users")
 		test_router := v1.Group("/test")
 		routers.Health(health)
 		routers.TestRouter(test_router)
+		// User
+		routers.User(users, cfg)
 	}
 
 	v2 := api.Group("/v2")
@@ -66,9 +71,14 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 func RegisterValidators() {
 	val, ok := binding.Validator.Engine().(*validator.Validate)
 	if ok {
-		val.RegisterValidation("mobil", validations.IranianMobileNumberValidator, true)
-		val.RegisterValidation("password", validations.PasswordValidator, true)
-
+		err := val.RegisterValidation("mobile", validation.IranianMobileNumberValidator, true)
+		if err != nil {
+			logger.Error(logging.Validation, logging.Startup, err.Error(), nil)
+		}
+		err = val.RegisterValidation("password", validation.PasswordValidator, true)
+		if err != nil {
+			logger.Error(logging.Validation, logging.Startup, err.Error(), nil)
+		}
 	}
 }
 
