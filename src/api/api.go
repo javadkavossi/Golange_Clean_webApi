@@ -54,9 +54,9 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 	{
 		health := v1.Group("/health")
 		users := v1.Group("/users")
-		test_router := v1.Group("/test")
+	
 		routers.Health(health)
-		routers.TestRouter(test_router)
+	
 		// User
 		routers.User(users, cfg)
 	}
