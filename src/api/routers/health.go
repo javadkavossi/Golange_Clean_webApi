@@ -1,4 +1,4 @@
-package routers
+package router
 
 import (
 	"github.com/gin-gonic/gin"
@@ -7,6 +7,6 @@ import (
 
 func Health(r *gin.RouterGroup) {
 	handler := handler.NewHealthHandler()
-	r.GET("/", handler.Health)
 
+	r.GET("/", handler.Health)
 }

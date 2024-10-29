@@ -8,7 +8,8 @@ import (
 	"github.com/go-playground/validator/v10"
 
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middlewares"
-	"github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
+	router "github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
+
 	validation "github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
 
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
@@ -54,17 +55,17 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 	{
 		health := v1.Group("/health")
 		users := v1.Group("/users")
-	
-		routers.Health(health)
-	
+
+		router.Health(health)
+
 		// User
-		routers.User(users, cfg)
+		router.User(users, cfg)
 	}
 
 	v2 := api.Group("/v2")
 	{
 		health := v2.Group("/health")
-		routers.Health(health)
+		router.Health(health)
 	}
 }
 
