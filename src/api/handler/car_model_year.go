@@ -27,7 +27,7 @@ func NewCarModelYearHandler(cfg *config.Config) *CarModelYearHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateCarModelYearRequest true "Create a CarModelYear"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.CarModelYearResponse} "CarModelYear response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-years/ [post]
 // @Security AuthBearer
@@ -43,7 +43,7 @@ func (h *CarModelYearHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateCarModelYearRequest true "Update a CarModelYear"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelYearResponse} "CarModelYear response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-years/{id} [put]
@@ -75,7 +75,7 @@ func (h *CarModelYearHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelYearResponse} "CarModelYear response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-years/{id} [get]
@@ -91,7 +91,7 @@ func (h *CarModelYearHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.CarModelYearResponse]} "CarModelYear response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-years/get-by-filter [post]
 // @Security AuthBearer

@@ -27,7 +27,7 @@ func NewCarModelCommentHandler(cfg *config.Config) *CarModelCommentHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateCarModelCommentRequest true "Create a CarModelComment"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.CarModelCommentResponse} "CarModelComment response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-comments/ [post]
 // @Security AuthBearer
@@ -43,7 +43,7 @@ func (h *CarModelCommentHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateCarModelCommentRequest true "Update a CarModelComment"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelCommentResponse} "CarModelComment response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-comments/{id} [put]
@@ -75,7 +75,7 @@ func (h *CarModelCommentHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelCommentResponse} "CarModelComment response"
+// @Success 200 {object} helper.BaseHttpResponse"
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-comments/{id} [get]
@@ -91,7 +91,7 @@ func (h *CarModelCommentHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.CarModelCommentResponse]} "CarModelComment response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-comments/get-by-filter [post]
 // @Security AuthBearer

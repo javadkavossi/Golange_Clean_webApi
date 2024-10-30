@@ -27,7 +27,7 @@ func NewPropertyCategoryHandler(cfg *config.Config) *PropertyCategoryHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreatePropertyCategoryRequest true "Create a PropertyCategory"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.PropertyCategoryResponse} "PropertyCategory response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/property-categories/ [post]
 // @Security AuthBearer

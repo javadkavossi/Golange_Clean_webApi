@@ -27,7 +27,7 @@ func NewCarModelPriceHistoryHandler(cfg *config.Config) *CarModelPriceHistoryHan
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateCarModelPriceHistoryRequest true "Create a CarModelPriceHistory"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.CarModelPriceHistoryResponse} "CarModelPriceHistory response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-price-histories/ [post]
 // @Security AuthBearer
@@ -43,7 +43,7 @@ func (h *CarModelPriceHistoryHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateCarModelPriceHistoryRequest true "Update a CarModelPriceHistory"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelPriceHistoryResponse} "CarModelPriceHistory response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-price-histories/{id} [put]
@@ -75,7 +75,7 @@ func (h *CarModelPriceHistoryHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelPriceHistoryResponse} "CarModelPriceHistory response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-price-histories/{id} [get]
@@ -91,7 +91,7 @@ func (h *CarModelPriceHistoryHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.CarModelPriceHistoryResponse]} "CarModelPriceHistory response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-price-histories/get-by-filter [post]
 // @Security AuthBearer

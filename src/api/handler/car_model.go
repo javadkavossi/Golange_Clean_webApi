@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/dto"
 	_ "github.com/javadkavossi/Golange_Clean_webApi/src/api/helper"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
@@ -12,6 +13,12 @@ import (
 
 type CarModelHandler struct {
 	usecase *usecase.CarModelUsecase
+}
+
+// CarModelPagedList struct for Swagger documentation
+type CarModelPagedList struct {
+    Items      []dto.CarModelResponse `json:"items"`
+    TotalCount int                    `json:"total_count"`
 }
 
 func NewCarModelHandler(cfg *config.Config) *CarModelHandler {
@@ -27,7 +34,7 @@ func NewCarModelHandler(cfg *config.Config) *CarModelHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateCarModelRequest true "Create a CarModel"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.CarModelResponse} "CarModel response"
+
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-models/ [post]
 // @Security AuthBearer
@@ -43,7 +50,7 @@ func (h *CarModelHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateCarModelRequest true "Update a CarModel"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelResponse} "CarModel response"
+// @Success 200 {object} helper.BaseHttpResponse"CarModel response"
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-models/{id} [put]
@@ -75,7 +82,7 @@ func (h *CarModelHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelResponse} "CarModel response"
+// @Success 200 {object} helper.BaseHttpResponse "CarModel response"
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-models/{id} [get]
@@ -91,7 +98,7 @@ func (h *CarModelHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.CarModelResponse]} "CarModel response"
+
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-models/get-by-filter [post]
 // @Security AuthBearer

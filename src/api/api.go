@@ -10,7 +10,7 @@ import (
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middlewares"
 	router "github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
 
-	validation "github.com/javadkavossi/Golange_Clean_webApi/src/api/validations"
+	validation "github.com/javadkavossi/Golange_Clean_webApi/src/api/validation"
 
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/docs"

@@ -27,7 +27,7 @@ func NewCarTypeHandler(cfg *config.Config) *CarTypeHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateCarTypeRequest true "Create a CarType"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.CarTypeResponse} "CarType response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-types/ [post]
 // @Security AuthBearer
@@ -43,7 +43,7 @@ func (h *CarTypeHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateCarTypeRequest true "Update a CarType"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarTypeResponse} "CarType response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-types/{id} [put]
@@ -75,7 +75,7 @@ func (h *CarTypeHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarTypeResponse} "CarType response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-types/{id} [get]
@@ -91,7 +91,7 @@ func (h *CarTypeHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.CarTypeResponse]} "CarType response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-types/get-by-filter [post]
 // @Security AuthBearer

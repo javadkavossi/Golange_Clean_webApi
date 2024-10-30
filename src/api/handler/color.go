@@ -27,7 +27,7 @@ func NewColorHandler(cfg *config.Config) *ColorHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateColorRequest true "Create a Color"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.ColorResponse} "Color response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/colors/ [post]
 // @Security AuthBearer
@@ -43,7 +43,7 @@ func (h *ColorHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateColorRequest true "Update a Color"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.ColorResponse} "Color response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/colors/{id} [put]
@@ -75,7 +75,7 @@ func (h *ColorHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.ColorResponse} "Color response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/colors/{id} [get]
@@ -91,7 +91,7 @@ func (h *ColorHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.ColorResponse]} "Color response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/colors/get-by-filter [post]
 // @Security AuthBearer

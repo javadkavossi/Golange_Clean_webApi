@@ -39,7 +39,7 @@ func NewFileHandler(cfg *config.Config) *FileHandler {
 // @produces json
 // @Param file formData dto.UploadFileRequest true "Create a file"
 // @Param file formData file true "Create a file"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.FileResponse} "File response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/files/ [post]
 // @Security AuthBearer
@@ -80,7 +80,7 @@ func (h *FileHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateFileRequest true "Update a file"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.FileResponse} "File response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/files/{id} [put]
 // @Security AuthBearer
@@ -136,7 +136,7 @@ func (h *FileHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.FileResponse} "File response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/files/{id} [get]
 // @Security AuthBearer
@@ -151,7 +151,7 @@ func (h *FileHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.FileResponse]} "File response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/files/get-by-filter [post]
 // @Security AuthBearer

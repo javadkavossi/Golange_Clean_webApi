@@ -27,7 +27,7 @@ func NewGearboxHandler(cfg *config.Config) *GearboxHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateGearboxRequest true "Create a Gearbox"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.GearboxResponse} "Gearbox response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/gearboxes/ [post]
 // @Security AuthBearer
@@ -43,7 +43,7 @@ func (h *GearboxHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateGearboxRequest true "Update a Gearbox"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.GearboxResponse} "Gearbox response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/gearboxes/{id} [put]
@@ -75,7 +75,7 @@ func (h *GearboxHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.GearboxResponse} "Gearbox response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/gearboxes/{id} [get]
@@ -91,7 +91,7 @@ func (h *GearboxHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.GearboxResponse]} "Gearbox response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/gearboxes/get-by-filter [post]
 // @Security AuthBearer

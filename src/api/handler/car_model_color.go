@@ -27,7 +27,7 @@ func NewCarModelColorHandler(cfg *config.Config) *CarModelColorHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreateCarModelColorRequest true "Create a CarModelColor"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.CarModelColorResponse} "CarModelColor response"
+
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-colors/ [post]
 // @Security AuthBearer
@@ -43,7 +43,7 @@ func (h *CarModelColorHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdateCarModelColorRequest true "Update a CarModelColor"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelColorResponse} "CarModelColor response"
+
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-colors/{id} [put]
@@ -75,7 +75,7 @@ func (h *CarModelColorHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.CarModelColorResponse} "CarModelColor response"
+
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/car-model-colors/{id} [get]
@@ -91,7 +91,7 @@ func (h *CarModelColorHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.CarModelColorResponse]} "CarModelColor response"
+
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/car-model-colors/get-by-filter [post]
 // @Security AuthBearer
