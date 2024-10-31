@@ -30,7 +30,7 @@ func NewPropertySimpleHandler(cfg *config.Config) *PropertySimpleHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreatePropertyRequest true "Create a Property"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.PropertyResponse} "Property response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/properties/ [post]
 // @Security AuthBearer
@@ -66,7 +66,7 @@ func (h *PropertySimpleHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdatePropertyRequest true "Update a Property"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.PropertyResponse} "Property response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/properties/{id} [put]
@@ -133,7 +133,7 @@ func (h *PropertySimpleHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.PropertyResponse} "Property response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/properties/{id} [get]
@@ -167,7 +167,7 @@ func (h *PropertySimpleHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.PropertyResponse]} "Property response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/properties/get-by-filter [post]
 // @Security AuthBearer

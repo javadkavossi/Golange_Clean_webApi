@@ -43,7 +43,7 @@ func (h *PropertyCategoryHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdatePropertyCategoryRequest true "Update a PropertyCategory"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.PropertyCategoryResponse} "PropertyCategory response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/property-categories/{id} [put]
@@ -75,7 +75,7 @@ func (h *PropertyCategoryHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.PropertyCategoryResponse} "PropertyCategory response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/property-categories/{id} [get]
@@ -91,7 +91,7 @@ func (h *PropertyCategoryHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.PropertyCategoryResponse]} "PropertyCategory response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/property-categories/get-by-filter [post]
 // @Security AuthBearer

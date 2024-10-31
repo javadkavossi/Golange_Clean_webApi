@@ -27,7 +27,7 @@ func NewPersianYearHandler(cfg *config.Config) *PersianYearHandler {
 // @Accept json
 // @produces json
 // @Param Request body dto.CreatePersianYearRequest true "Create a PersianYear"
-// @Success 201 {object} helper.BaseHttpResponse{result=dto.PersianYearResponse} "PersianYear response"
+// @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/years/ [post]
 // @Security AuthBearer
@@ -44,7 +44,7 @@ func (h *PersianYearHandler) Create(c *gin.Context) {
 // @produces json
 // @Param id path int true "Id"
 // @Param Request body dto.UpdatePersianYearRequest true "Update a PersianYear"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.PersianYearResponse} "PersianYear response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/years/{id} [put]
@@ -76,7 +76,7 @@ func (h *PersianYearHandler) Delete(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param id path int true "Id"
-// @Success 200 {object} helper.BaseHttpResponse{result=dto.PersianYearResponse} "PersianYear response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/years/{id} [get]
@@ -92,7 +92,7 @@ func (h *PersianYearHandler) GetById(c *gin.Context) {
 // @Accept json
 // @produces json
 // @Param Request body filter.PaginationInputWithFilter true "Request"
-// @Success 200 {object} helper.BaseHttpResponse{result=filter.PagedList[dto.PersianYearResponse]} "PersianYear response"
+// @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/years/get-by-filter [post]
 // @Security AuthBearer

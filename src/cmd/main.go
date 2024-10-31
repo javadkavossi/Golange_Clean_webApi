@@ -10,6 +10,10 @@ import (
 	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/logging"
 )
 
+
+// @securityDefinitions.apikey AuthBearer
+// @in header
+// @name Authorization
 func main() {
 	cfg := config.GetConfig()
 	logger := logging.NewLogger(cfg)
