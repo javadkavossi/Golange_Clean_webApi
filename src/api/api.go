@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
 
-	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middlewares"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middleware"
 	router "github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
 
 	validation "github.com/javadkavossi/Golange_Clean_webApi/src/api/validation"
@@ -25,11 +25,11 @@ func InitServer(cfg *config.Config) {
 	// cfg := config.GetConfig()
 	r := gin.New()
 	// *-------------------------- Get Functions
-	r.Use(middlewares.DefaultStructuredLogger(cfg))
+	r.Use(middleware.DefaultStructuredLogger(cfg))
 	// ?-------------------------------------------------
 
-	r.Use(middlewares.Cors(cfg))
-	r.Use(gin.Logger(), gin.CustomRecovery(middlewares.ErrorHandler) /*middlewares.TestMiddleware()*/, middlewares.LimiterByRequest())
+	r.Use(middleware.Cors(cfg))
+	r.Use(gin.Logger(), gin.CustomRecovery(middleware.ErrorHandler) /*middlewares.TestMiddleware()*/, middleware.LimiterByRequest())
 
 	RegisterValidators()
 	RegisterSwagger(r, cfg)
