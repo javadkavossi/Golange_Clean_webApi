@@ -6,15 +6,17 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
-
 	"github.com/javadkavossi/Golange_Clean_webApi/src/api/middleware"
 	router "github.com/javadkavossi/Golange_Clean_webApi/src/api/routers"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 
 	validation "github.com/javadkavossi/Golange_Clean_webApi/src/api/validation"
 
 	"github.com/javadkavossi/Golange_Clean_webApi/src/config"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/docs"
 	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/logging"
+	"github.com/javadkavossi/Golange_Clean_webApi/src/pkg/metrics"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -22,20 +24,18 @@ import (
 var logger = logging.NewLogger(config.GetConfig())
 
 func InitServer(cfg *config.Config) {
-	// cfg := config.GetConfig()
+	gin.SetMode(cfg.Server.RunMode)
 	r := gin.New()
-	// *-------------------------- Get Functions
-	r.Use(middleware.DefaultStructuredLogger(cfg))
-	// ?-------------------------------------------------
-
-	r.Use(middleware.Cors(cfg))
-	r.Use(gin.Logger(), gin.CustomRecovery(middleware.ErrorHandler) /*middlewares.TestMiddleware()*/, middleware.LimiterByRequest())
-
 	RegisterValidators()
-	RegisterSwagger(r, cfg)
-	RegisterRoutes(r, cfg)
+	RegisterPrometheus()
 
-	r.Run(fmt.Sprintf(":%s", cfg.Server.ExternalPort))
+	r.Use(middleware.DefaultStructuredLogger(cfg))
+	r.Use(middleware.Cors(cfg))
+	r.Use(middleware.Prometheus())
+	r.Use(gin.Logger(), gin.CustomRecovery(middleware.ErrorHandler) /*middleware.TestMiddleware()*/, middleware.LimiterByRequest())
+
+	RegisterRoutes(r, cfg)
+	RegisterSwagger(r, cfg)
 	logger := logging.NewLogger(cfg)
 	logger.Info(logging.General, logging.Startup, "Started", nil)
 	err := r.Run(fmt.Sprintf(":%s", cfg.Server.InternalPort))
@@ -114,7 +114,7 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 
 		r.Static("/static", "./uploads")
 
-		// r.GET("/metrics", gin.WrapH(promhttp.Handler()))
+		r.GET("/metrics", gin.WrapH(promhttp.Handler()))
 	}
 	v2 := api.Group("/v2")
 	{
@@ -151,4 +151,16 @@ func RegisterSwagger(r *gin.Engine, cfg *config.Config) {
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
+}
+
+func RegisterPrometheus() {
+	err := prometheus.Register(metrics.DbCall)
+	if err != nil {
+		logger.Error(logging.Prometheus, logging.Startup, err.Error(), nil)
+	}
+
+	err = prometheus.Register(metrics.HttpDuration)
+	if err != nil {
+		logger.Error(logging.Prometheus, logging.Startup, err.Error(), nil)
+	}
 }

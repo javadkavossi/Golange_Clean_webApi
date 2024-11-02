@@ -48,7 +48,7 @@ func (r BaseRepository[TEntity]) Create(ctx context.Context, entity TEntity) (TE
 	tx.Commit()
 
 	metrics.DbCall.WithLabelValues(reflect.TypeOf(entity).String(), "Create", "Success").Inc()
-	return entity, nil
+	return entity, nil 
 }
 
 func (r BaseRepository[TEntity]) Update(ctx context.Context, id int, entity map[string]interface{}) (TEntity, error) {
