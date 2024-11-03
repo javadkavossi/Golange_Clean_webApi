@@ -29,7 +29,7 @@ func NewMaterialHandler(cfg *config.Config) *MaterialHandler {
 // @Param Request body dto.CreateColorRequest true "Create a Color"
 // @Success 201 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
-// @Router /v1/Material/ [post]
+// @Router /v1/material/ [post]
 // @Security AuthBearer
 func (h *MaterialHandler) Create(c *gin.Context) {
 	Create(c, dto.ToCreateMaterial, dto.ToMaterialResponse, h.usecase.Create)
@@ -46,7 +46,7 @@ func (h *MaterialHandler) Create(c *gin.Context) {
 // @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
-// @Router /v1/Material/{id} [put]
+// @Router /v1/material/{id} [put]
 // @Security AuthBearer
 func (h *MaterialHandler) Update(c *gin.Context) {
 	Update(c, dto.ToUpdateMaterial, dto.ToMaterialResponse, h.usecase.Update)
@@ -62,7 +62,7 @@ func (h *MaterialHandler) Update(c *gin.Context) {
 // @Success 200 {object} helper.BaseHttpResponse "response"
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
-// @Router /v1/Material/{id} [delete]
+// @Router /v1/material/{id} [delete]
 // @Security AuthBearer
 func (h *MaterialHandler) Delete(c *gin.Context) {
 	Delete(c, h.usecase.Delete)
@@ -78,7 +78,7 @@ func (h *MaterialHandler) Delete(c *gin.Context) {
 // @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
-// @Router /v1/Material/{id} [get]
+// @Router /v1/material/{id} [get]
 // @Security AuthBearer
 func (h *MaterialHandler) GetById(c *gin.Context) {
 	GetById(c, dto.ToMaterialResponse, h.usecase.GetById)
@@ -93,7 +93,7 @@ func (h *MaterialHandler) GetById(c *gin.Context) {
 // @Param Request body filter.PaginationInputWithFilter true "Request"
 // @Success 200 {object} helper.BaseHttpResponse
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
-// @Router /v1/Material/get-by-filter [post]
+// @Router /v1/material/get-by-filter [post]
 // @Security AuthBearer
 func (h *MaterialHandler) GetByFilter(c *gin.Context) {
 	GetByFilter(c, dto.ToMaterialResponse, h.usecase.GetByFilter)

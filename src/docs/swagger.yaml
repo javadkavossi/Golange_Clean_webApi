@@ -471,149 +471,6 @@ definitions:
 info:
   contact: {}
 paths:
-  /v1/Material/:
-    post:
-      consumes:
-      - application/json
-      description: Create a Color
-      parameters:
-      - description: Create a Color
-        in: body
-        name: Request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.CreateColorRequest'
-      responses:
-        "201":
-          description: Created
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "400":
-          description: Bad request
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-      security:
-      - AuthBearer: []
-      summary: Create a Color
-      tags:
-      - Material
-  /v1/Material/{id}:
-    delete:
-      consumes:
-      - application/json
-      description: Delete a Color
-      parameters:
-      - description: Id
-        in: path
-        name: id
-        required: true
-        type: integer
-      responses:
-        "200":
-          description: response
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "400":
-          description: Bad request
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "404":
-          description: Not found
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-      security:
-      - AuthBearer: []
-      summary: Delete a Color
-      tags:
-      - Material
-    get:
-      consumes:
-      - application/json
-      description: Get a Color
-      parameters:
-      - description: Id
-        in: path
-        name: id
-        required: true
-        type: integer
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "400":
-          description: Bad request
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "404":
-          description: Not found
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-      security:
-      - AuthBearer: []
-      summary: Get a Color
-      tags:
-      - Material
-    put:
-      consumes:
-      - application/json
-      description: Update a Color
-      parameters:
-      - description: Id
-        in: path
-        name: id
-        required: true
-        type: integer
-      - description: Update a Color
-        in: body
-        name: Request
-        required: true
-        schema:
-          $ref: '#/definitions/dto.UpdateColorRequest'
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "400":
-          description: Bad request
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "404":
-          description: Not found
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-      security:
-      - AuthBearer: []
-      summary: Update a Color
-      tags:
-      - Material
-  /v1/Material/get-by-filter:
-    post:
-      consumes:
-      - application/json
-      description: Get Material
-      parameters:
-      - description: Request
-        in: body
-        name: Request
-        required: true
-        schema:
-          $ref: '#/definitions/filter.PaginationInputWithFilter'
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-        "400":
-          description: Bad request
-          schema:
-            $ref: '#/definitions/helper.BaseHttpResponse'
-      security:
-      - AuthBearer: []
-      summary: Get Material
-      tags:
-      - Material
   /v1/car-model-colors/:
     post:
       responses:
@@ -2508,6 +2365,149 @@ paths:
       summary: Health Check
       tags:
       - health
+  /v1/material/:
+    post:
+      consumes:
+      - application/json
+      description: Create a Color
+      parameters:
+      - description: Create a Color
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateColorRequest'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+      security:
+      - AuthBearer: []
+      summary: Create a Color
+      tags:
+      - Material
+  /v1/material/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a Color
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: response
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+      security:
+      - AuthBearer: []
+      summary: Delete a Color
+      tags:
+      - Material
+    get:
+      consumes:
+      - application/json
+      description: Get a Color
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+      security:
+      - AuthBearer: []
+      summary: Get a Color
+      tags:
+      - Material
+    put:
+      consumes:
+      - application/json
+      description: Update a Color
+      parameters:
+      - description: Id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update a Color
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateColorRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "404":
+          description: Not found
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+      security:
+      - AuthBearer: []
+      summary: Update a Color
+      tags:
+      - Material
+  /v1/material/get-by-filter:
+    post:
+      consumes:
+      - application/json
+      description: Get Material
+      parameters:
+      - description: Request
+        in: body
+        name: Request
+        required: true
+        schema:
+          $ref: '#/definitions/filter.PaginationInputWithFilter'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+        "400":
+          description: Bad request
+          schema:
+            $ref: '#/definitions/helper.BaseHttpResponse'
+      security:
+      - AuthBearer: []
+      summary: Get Material
+      tags:
+      - Material
   /v1/properties/:
     post:
       consumes:
