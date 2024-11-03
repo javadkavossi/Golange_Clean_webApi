@@ -82,6 +82,12 @@ func GetColorRepository(cfg *config.Config) contractRepository.ColorRepository {
 	return infraRepository.NewBaseRepository[model.Color](cfg, preloads)
 }
 
+func GetMaterialRepository(cfg *config.Config) contractRepository.MaterialRepository {
+	var preloads []database.PreloadEntity = []database.PreloadEntity{}
+	return infraRepository.NewBaseRepository[model.Material](cfg, preloads)
+}
+
+
 func GetCompanyRepository(cfg *config.Config) contractRepository.CompanyRepository {
 	var preloads []database.PreloadEntity = []database.PreloadEntity{{Entity: "Country"}}
 	return infraRepository.NewBaseRepository[model.Company](cfg, preloads)

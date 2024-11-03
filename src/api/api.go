@@ -65,6 +65,7 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 		files := v1.Group("/files", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
 		companies := v1.Group("/companies", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
 		colors := v1.Group("/colors", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
+		material := v1.Group("/material", middleware.Authentication(cfg), middleware.Authorization([]string{"user"}))
 		years := v1.Group("/years", middleware.Authentication(cfg), middleware.Authorization([]string{"admin"}))
 
 		// Property
@@ -95,6 +96,7 @@ func RegisterRoutes(r *gin.Engine, cfg *config.Config) {
 		router.File(files, cfg)
 		router.Company(companies, cfg)
 		router.Color(colors, cfg)
+		router.Material(material, cfg)
 		router.Year(years, cfg)
 
 		// Property

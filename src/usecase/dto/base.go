@@ -79,6 +79,29 @@ type Color struct {
 	HexCode string 
 }
 
+// Material -----------------
+
+type CreateMaterial struct{
+	Name string
+	HexCode string
+}
+
+type UpdateMaterial struct {
+	Name string
+	HexCode string
+}
+
+type Material struct{
+	IdName
+	HexCode string
+}
+
+// ------------------
+
+
+
+
+
 type CreatePersianYear struct {
 	PersianTitle string
 	Year         int

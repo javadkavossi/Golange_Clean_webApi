@@ -35,6 +35,10 @@ type ColorRepository interface {
 	BaseRepository[model.Color]
 }
 
+type MaterialRepository interface {
+	BaseRepository[model.Material]
+}
+
 type FileRepository interface {
 	BaseRepository[model.File]
 }
