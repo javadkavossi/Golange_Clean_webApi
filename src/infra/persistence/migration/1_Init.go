@@ -26,6 +26,7 @@ func Up1() {
 	createCarType(database)
 	createGearbox(database)
 	createColor(database)
+	createMaterial(database)
 	createYear(database)
 
 }
@@ -38,6 +39,7 @@ func createTables(database *gorm.DB) {
 	tables = addNewTable(database, models.City{}, tables)
 	tables = addNewTable(database, models.File{}, tables)
 	tables = addNewTable(database, models.PersianYear{}, tables)
+	tables = addNewTable(database, models.Material{}, tables)
 	// Property
 	tables = addNewTable(database, models.PropertyCategory{}, tables)
 	tables = addNewTable(database, models.Property{}, tables)
@@ -321,6 +323,15 @@ func createColor(database *gorm.DB) {
 		database.Create(&models.Color{Name: "Black", HexCode: "#000000"})
 		database.Create(&models.Color{Name: "White", HexCode: "#ffffff"})
 		database.Create(&models.Color{Name: "Blue", HexCode: "#0000ff"})
+	}
+}
+
+func createMaterial(database *gorm.DB) {
+	count := 0
+	database.
+		Model(&models.Material{}).Select(countStarExp).Find(&count)
+	if count == 0 {
+		database.Create(&models.Color{Name: "Platinum", HexCode: "#123654"})
 	}
 }
 

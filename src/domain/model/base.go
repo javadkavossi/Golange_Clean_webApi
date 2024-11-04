@@ -43,5 +43,5 @@ type File struct {
 type Material struct {
 	BaseModel
 	Name         string `gorm:"size:100;type:string;not null,unique"`
-	HexColorCode string `gorm:"size:7;type:string;not null,unique"`
+	HexCode string `gorm:"size:7;type:string;not null,unique"`
 }
