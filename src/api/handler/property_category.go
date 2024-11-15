@@ -48,6 +48,7 @@ func (h *PropertyCategoryHandler) Create(c *gin.Context) {
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/property-categories/{id} [put]
 // @Security AuthBearer
+
 func (h *PropertyCategoryHandler) Update(c *gin.Context) {
 	Update(c, dto.ToUpdatePropertyCategory, dto.ToPropertyCategoryResponse, h.usecase.Update)
 }
