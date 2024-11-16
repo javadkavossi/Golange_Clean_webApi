@@ -31,7 +31,6 @@ func NewPropertyCategoryHandler(cfg *config.Config) *PropertyCategoryHandler {
 // @Failure 400 {object} helper.BaseHttpResponse "Bad request"
 // @Router /v1/property-categories/ [post]
 // @Security AuthBearer
-
 func (h *PropertyCategoryHandler) Create(c *gin.Context) {
 	Create(c, dto.ToCreatePropertyCategory, dto.ToPropertyCategoryResponse, h.usecase.Create)
 }
@@ -49,11 +48,9 @@ func (h *PropertyCategoryHandler) Create(c *gin.Context) {
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/property-categories/{id} [put]
 // @Security AuthBearer
-
 func (h *PropertyCategoryHandler) Update(c *gin.Context) {
 	Update(c, dto.ToUpdatePropertyCategory, dto.ToPropertyCategoryResponse, h.usecase.Update)
 }
-
 
 // DeletePropertyCategory godoc
 // @Summary Delete a PropertyCategory
@@ -67,7 +64,6 @@ func (h *PropertyCategoryHandler) Update(c *gin.Context) {
 // @Failure 404 {object} helper.BaseHttpResponse "Not found"
 // @Router /v1/property-categories/{id} [delete]
 // @Security AuthBearer
-
 func (h *PropertyCategoryHandler) Delete(c *gin.Context) {
 	Delete(c, h.usecase.Delete)
 }
