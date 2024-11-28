@@ -16,6 +16,7 @@ import (
 // @description Type "Bearer " followed by your token
 
 func main() {
+
 	cfg := config.GetConfig()
 	logger := logging.NewLogger(cfg)
 
@@ -24,11 +25,13 @@ func main() {
 	if err != nil {
 		logger.Fatal(logging.Redis, logging.Startup, err.Error(), nil)
 	}
+
 	err = db.InitDb(cfg)
 	defer db.CloseDb()
 	if err != nil {
 		logger.Fatal(logging.Postgres, logging.Startup, err.Error(), nil)
 	}
+	
 	migration.Up1()
 
 	api.InitServer(cfg)
