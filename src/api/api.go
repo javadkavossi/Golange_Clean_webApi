@@ -135,6 +135,7 @@ func RegisterValidators() {
 		err = val.RegisterValidation("password", validation.PasswordValidator, true)
 		if err != nil {
 			logger.Error(logging.Validation, logging.Startup, err.Error(), nil)
+			
 		}
 	}
 }

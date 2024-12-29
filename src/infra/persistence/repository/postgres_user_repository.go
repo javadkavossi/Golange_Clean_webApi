@@ -12,7 +12,7 @@ import (
 	"gorm.io/gorm"
 )
 
-const userFilterExp string = "username = ?"
+const userFilterExp string = "telegramId = ?"
 const countFilterExp string = "count(*) > 0"
 
 type PostgresUserRepository struct {
@@ -23,6 +23,8 @@ func NewUserRepository(cfg *config.Config) *PostgresUserRepository {
 	var preloads []database.PreloadEntity = []database.PreloadEntity{}
 	return &PostgresUserRepository{BaseRepository: NewBaseRepository[model.User](cfg, preloads)}
 }
+
+// ------------------------------- Create User -------------------------------
 
 func (r *PostgresUserRepository) CreateUser(ctx context.Context, u model.User) (model.User, error) {
 
@@ -119,3 +121,4 @@ func (r *PostgresUserRepository) GetDefaultRole(ctx context.Context) (roleId int
 	}
 	return roleId, nil
 }
+
